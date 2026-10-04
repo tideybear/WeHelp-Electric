@@ -81,3 +81,33 @@ curl -X POST http://yourdomain.com/api/login \
 | 生产 `npm run build` | `.env.production` | `/api`（Nginx 反代） |
 
 修改环境变量后需重新执行 `npm run dev` 或 `npm run build`。
+
+
+
+
+常用 Git 操作
+1. 查看当前状态
+git status
+2. 添加文件到暂存区
+git add .          # 添加所有文件
+git add 文件名      # 添加指定文件
+3. 提交代码
+git commit -m "提交说明"
+4. 推送到 GitHub
+git push origin main    # 推送到 main 分支
+5. 从 GitHub 拉取更新
+git pull origin main
+
+
+
+# 1. 切到目标分支 main
+git switch main
+
+# 2. 拉取 main 最新代码
+git pull
+
+# 3. 合并功能分支
+git merge feature/login
+
+# 4. 推送到远程
+git push
