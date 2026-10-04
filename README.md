@@ -111,3 +111,63 @@ git merge feature/login
 
 # 4. 推送到远程
 git push
+
+
+git fetch origin
+git switch feature/login
+git rebase origin/main
+
+
+1. 创建新分支前：要先更新 main
+这是对的，因为新分支最好基于最新的 main。
+
+bash
+git status              # 确保工作区干净
+git switch main
+git pull                # 或 git pull --rebase
+git switch -c feature/xxx
+这样新分支就是从最新 main 开始的，后面冲突会少很多。
+
+2. 切换到已有分支：拉取该分支，不是先拉 main
+比如你要继续开发 feature/login：
+
+bash
+git status
+git fetch origin
+git switch feature/login
+git pull
+这里 git pull 拉的是 feature/login 的远程更新，不是 main。
+
+如果你先切到 main 拉取，再切回 feature/login，这个功能分支本身可能还是旧的，远程别人推的代码你并没有拉下来。
+
+3. 如果你想让功能分支同步 main 最新代码
+不是“切换分支前先拉 main”，而是切到功能分支后，把 main 合并或 rebase 进来：
+
+bash
+git fetch origin
+git switch feature/login
+git rebase origin/main
+或者：
+
+bash
+git merge origin/main
+rebase 历史更线性，但如果是多人共用的分支，不要随便 rebase，用 merge 更安全。
+
+4. 推荐日常流程
+开始新功能
+bash
+git status
+git switch main
+git pull --rebase
+git switch -c feature/xxx
+继续已有功能
+bash
+git status
+git fetch origin
+git switch feature/xxx
+git pull --rebase
+功能分支同步 main
+bash
+git fetch origin
+git switch feature/xxx
+git rebase origin/main
